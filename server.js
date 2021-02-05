@@ -1,11 +1,12 @@
 const express = require('express');
+require('dotenv').config();
 
 const app = express();
 const cors = require('cors');
 const mainController = require('./controllers');
 const { sequelize } = require('./models');
 const cookieParser = require('cookie-parser');
-const port = 4000;
+const port = process.env.DATABASE_PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

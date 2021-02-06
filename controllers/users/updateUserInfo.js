@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
         if (err.errors[0].path === 'password') {
           res.status(400).json({
             message:
-              'Please enter a password of more than 8 characters including numbers',
+              'Please enter a password of at least 8 characters including numbers',
           });
         } else if (err.errors[0].path === 'phone') {
           res

@@ -1,8 +1,5 @@
 'use strict';
 
-const likes = require('../models/likes');
-const users = require('../models/users');
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('usersLikesJoins', {
@@ -14,7 +11,7 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        references: { model: users, key: 'id' },
+        references: { model: 'users', key: 'id' },
       },
       likeId: {
         type: Sequelize.INTEGER,

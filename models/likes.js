@@ -9,14 +9,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ chats, users }) {
       // define association here
-      this.belongsTo(chats, { foreignKey: 'chatId', targetKey: 'id' });
-      this.belongsTo(users, { foreignKey: 'userId', targetKey: 'id' });
+      this.belongsTo(chats, { foreignKey: 'chatId' });
+      this.belongsToMany(users, {
+        through: 'usersLikesJoin',
+        foreignKey: 'likeId',
+      });
     }
   }
   likes.init(
     {
-      chatId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      chatId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,

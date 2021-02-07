@@ -1,30 +1,25 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class channels extends Model {
+  class usersLikesJoin extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ chats, users }) {
+    static associate() {
       // define association here
-      this.hasMany(chats, { foreignKey: 'channelId' });
-      this.belongsToMany(users, {
-        through: 'usersChannelsJoin',
-        foreignKey: 'channelId',
-      });
     }
   }
-  channels.init(
+  usersLikesJoin.init(
     {
-      channelName: DataTypes.STRING,
-      image: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
+      likeId: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: 'channels',
+      modelName: 'usersLikesJoin',
     },
   );
-  return channels;
+  return usersLikesJoin;
 };

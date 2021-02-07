@@ -7,22 +7,16 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ users, channels, likes }) {
+    static associate({ users, likes, channels }) {
       // define association here
       this.belongsTo(users, { foreignKey: 'userId' });
       this.belongsTo(channels, { foreignKey: 'channelId' });
-      this.hasMany(likes, {
-        foreignKey: 'chatId',
-        targetKey: 'id',
-      });
+      this.hasMany(likes, { foreignKey: 'chatId' });
     }
   }
   chats.init(
     {
       channelId: {
-        type: DataTypes.INTEGER,
-      },
-      likeId: {
         type: DataTypes.INTEGER,
       },
       userId: {

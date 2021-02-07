@@ -53,6 +53,6 @@ app.post('/likes/clickLike', mainController.clickLike);
 
 app.listen(port, async () => {
   console.log(`Listening on port:${port}`);
-  await sequelize.authenticate();
+  await sequelize.sync();
   console.log('DB connected');
 });

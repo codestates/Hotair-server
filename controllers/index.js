@@ -9,4 +9,5 @@ module.exports = {
   getChats: require('./chats/getChats'),
   sendChat: require('./chats/sendChat'),
   clickLike: require('./likes/clickLike'),
+  addChannel: require('./channels/addChannel'),
 };

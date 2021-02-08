@@ -10,9 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ chats, users }) {
       // define association here
       this.belongsTo(chats, { foreignKey: 'chatId' });
-      this.belongsToMany(users, {
-        through: 'usersLikesJoin',
-        foreignKey: 'likeId',
+      this.belongsTo(users, {
+        foreignKey: 'userId',
       });
     }
   }
@@ -23,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       chatId: {
         type: DataTypes.INTEGER,

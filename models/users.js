@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         through: 'usersChannelsJoin',
         foreignKey: 'userId',
       });
-      this.belongsToMany(likes, {
-        through: 'usersLikesJoin',
+      this.hasMany(likes, {
         foreignKey: 'userId',
       });
     }

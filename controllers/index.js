@@ -10,4 +10,5 @@ module.exports = {
   sendChat: require('./chats/sendChat'),
   clickLike: require('./likes/clickLike'),
   addChannel: require('./channels/addChannel'),
+  getChannels: require('./channels/getChannels'),
 };

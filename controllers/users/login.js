@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'Your email is not registered' });
     } else {
-      const token = jwt.sign({ uuid: user.uuid }, process.env.SECRET, {
+      const token = await jwt.sign({ uuid: user.uuid }, process.env.SECRET, {
         expiresIn: '3h',
       });
       return res.status(200).json({ message: 'Login success!', token });

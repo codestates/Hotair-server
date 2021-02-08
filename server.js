@@ -15,8 +15,11 @@ app.use(cors());
 
 app.use('', router);
 
-app.listen(port, async () => {
+const server = app.listen(port, async () => {
   console.log(`Listening on port:${port}`);
   await sequelize.sync();
   console.log('DB connected');
 });
+
+const io = require('socket.io')(server);
+module.exports = io;

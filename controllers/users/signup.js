@@ -12,7 +12,12 @@ module.exports = async (req, res) => {
         .status(409)
         .json({ message: 'User with username or email is already registered' });
     } else {
-      const user = await users.create({ username, email, password, phone });
+      const user = await users.create({
+        username,
+        email,
+        password,
+        phone,
+      });
       return res
         .status(201)
         .json({ message: `Signed up successfully with ${user.email}` });

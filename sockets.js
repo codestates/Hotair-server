@@ -1,6 +1,7 @@
 import { io } from './server.js';
 const jwt = require('jsonwebtoken');
-const { chats, users } = require('./models');
+const { chats, users, channels, usersChannelsJoin } = require('./models');
+const { Op } = require('sequelize');
 
 io.use(async (socket, next) => {
   try {
@@ -20,24 +21,36 @@ io.on('connection', (socket) => {
     console.log('Disconnected: ' + socket.username);
   });
 
-  socket.on('joinChannel', ({ channelName }) => {
+  socket.on('joinChannel', async ({ channelName, username }) => {
     socket.join(channelName);
-    console.log(`A user joined channel : ${channelName}`);
+    console.log(`${username} joined channel : ${channelName}`);
+    const channel = await channels.findOne({ where: { channelName } });
+    const user = await users.findOne({ where: { username } });
+    await usersChannelsJoin.create({ userId: user.id, channelId: channel.id });
   });
 
-  socket.on('leaveChannel', ({ channelName }) => {
+  socket.on('leaveChannel', async ({ channelName, username }) => {
     socket.leave(channelName);
-    console.log(`A user left channel : ${channelName}`);
+    console.log(`${username} left channel : ${channelName}`);
+    const channel = await channels.findOne({ where: { channelName } });
+    const user = await users.findOne({ where: { username } });
+    const userChannel = await usersChannelsJoin.findOne({
+      where: {
+        userId: user.id,
+        channelId: channel.id,
+      },
+    });
+    await userChannel.destroy();
   });
 
-  socket.on('channelMessage', async ({ channelName, message }) => {
-    if (message.trim().length > 0) {
+  socket.on('channelChat', async ({ channelName, text }) => {
+    if (text.trim().length > 0) {
       const user = await users.findOne({
         where: { username: socket.username },
       });
       const chat = await chats.create({});
-      io.to(channelName).emit('newMessage', {
-        message,
+      io.to(channelName).emit('newText', {
+        text,
         username: socket.username,
       });
     }

@@ -2,17 +2,6 @@ const { chats } = require('../../models');
 const { users } = require('../../models');
 
 module.exports = async (req, res) => {
-  // const authorization = req.headers.authorization;
-  // if (!authorization) return res.status(401).json({"Unauthorized"})
-  // else {
-  //  const token = authorization.split(' ')[1]
-  //  try {
-  //    return verify(token, process.env.ACCESS_SECRET);
-  //  } catch (err) {
-  //   // return null if invalid token
-  //    return null;
-  //  }
-  // }
   const { uuid, text, channelId } = req.body;
   try {
     const user = await users.findOne({ where: { uuid: uuid } });

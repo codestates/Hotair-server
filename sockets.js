@@ -1,13 +1,16 @@
 import { io } from './server.js';
 const jwt = require('jsonwebtoken');
 const { chats, users, channels, usersChannelsJoin } = require('./models');
-const { Op } = require('sequelize');
+// const { Op } = require('sequelize');
+require('dotenv').config();
 
 io.use(async (socket, next) => {
   try {
     const token = socket.handshake.query.token;
     const userInfo = await jwt.verify(token, process.env.SECRET);
+    console.log(userInfo);
     socket.username = userInfo.username;
+    console.log(`1111111111  ${socket.username}`);
     next();
   } catch (err) {
     console.log(err);
@@ -48,7 +51,8 @@ io.on('connection', (socket) => {
       const user = await users.findOne({
         where: { username: socket.username },
       });
-      const chat = await chats.create({});
+      const channel = await channels.findOne({ where: { channelName } });
+      await chats.create({ userId: user.id, channelId: channel.id, text });
       io.to(channelName).emit('newText', {
         text,
         username: socket.username,

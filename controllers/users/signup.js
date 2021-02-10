@@ -23,7 +23,6 @@ module.exports = async (req, res) => {
         .json({ message: `Signed up successfully with ${user.email}` });
     }
   } catch (err) {
-    console.log(err);
     switch (err.errors[0].validatorKey) {
       case 'notEmpty':
         res.status(400).json({ message: 'Please fill all the information' });

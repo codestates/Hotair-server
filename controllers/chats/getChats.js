@@ -11,7 +11,6 @@ module.exports = async (req, res) => {
     await chatList.user.password.delete();
     return res.status(200).json(chatList);
   } catch (err) {
-    console.log(err);
     return res.status(500).json(err);
   }
 };

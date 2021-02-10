@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   try {
     const user = await users.findOne({ where: { uuid } });
     await user.destroy();
-    return res.json({ message: 'Guest logged out' });
+    return res.status(200).json({ message: 'Guest logged out' });
   } catch (err) {
     return res.status(500).json(err);
   }

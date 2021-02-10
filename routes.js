@@ -15,7 +15,7 @@ router.post('/users/login', mainController.login);
 router.post('/users/guestLogin', mainController.guestLogin);
 
 // Guest logout
-router.delete('/users/guestLogout', mainController.guestLogout);
+router.delete('/users/guestLogout/:uuid', mainController.guestLogout);
 
 //App component에서 모든 유저 정보 불러오기 컨트롤러 users/getOtherUsersInfo.js
 // res = 모든 유저 정보 (id, password 제외)

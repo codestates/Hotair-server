@@ -11,7 +11,6 @@ module.exports = async (req, res) => {
     const channel = await channels.findOne({ where: { channelName } });
     return res.status(200).json({ channel });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };

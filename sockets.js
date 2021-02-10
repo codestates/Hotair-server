@@ -1,4 +1,4 @@
-import { io } from './server.js';
+const io = require('./server');
 const jwt = require('jsonwebtoken');
 const { chats, users, channels, usersChannelsJoin } = require('./models');
 // const { Op } = require('sequelize');
@@ -10,7 +10,6 @@ io.use(async (socket, next) => {
     const userInfo = await jwt.verify(token, process.env.SECRET);
     console.log(userInfo);
     socket.username = userInfo.username;
-    console.log(`1111111111  ${socket.username}`);
     next();
   } catch (err) {
     console.log(err);

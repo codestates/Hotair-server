@@ -7,7 +7,6 @@ module.exports = async (req, res) => {
     const user = await users.findOne({ where: { uuid } });
     return res.status(200).json(user);
   } catch (err) {
-    console.log(err);
     return res.status(500).json(err);
   }
 };

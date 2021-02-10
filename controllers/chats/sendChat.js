@@ -18,7 +18,6 @@ module.exports = async (req, res) => {
       time: chat.createdAt,
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).json(err);
   }
 };

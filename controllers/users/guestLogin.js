@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
       email: 'guest@guest.com',
       password: 'guest123',
       phone: '010-1234-1234',
+      isUser: false,
     });
     const user = await users.findOne({ where: { username: 'guest' } });
     const guestNumber = await user.uuid.slice(0, 4);

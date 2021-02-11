@@ -3,9 +3,9 @@ const { users } = require('../../models');
 
 module.exports = async (req, res) => {
   try {
-    const channelId = req.params.channelId;
+    const channelName = req.params.channelName;
     const chatList = await chats.findAll({
-      where: { channelId: channelId },
+      where: { channelName: channelName },
       include: users,
     });
     await chatList.user.password.delete();

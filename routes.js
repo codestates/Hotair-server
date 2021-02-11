@@ -19,7 +19,7 @@ router.delete('/users/guestLogout/:uuid', mainController.guestLogout);
 
 //App component에서 모든 유저 정보 불러오기 컨트롤러 users/getOtherUsersInfo.js
 // res = 모든 유저 정보 (id, password 제외)
-router.get('/users', auth, mainController.getOtherUsersInfo);
+router.get('/users/:channelName', auth, mainController.getOtherUsersInfo);
 
 //Mypage component에서 로그인된 회원정보 불러오기 컨트롤러 users/getUserInfo.js
 // path = 유저의 uuid
@@ -60,5 +60,12 @@ router.post('/channels/addChannel', auth, mainController.addChannel);
 // req = Authorization
 // res = channel list
 router.get('/channels', auth, mainController.getChannels);
+
+// ----------------------
+// 깃허브 로그인
+// post: client에서 포스트 요청으로 보낸 authorization code가 req
+router.post('/github/login/callback', mainController.githubLoginCallback);
+// get: access token에 있는 리소스서버를 확인
+router.get('/github/login/images', mainController.githubLoginImages);
 
 module.exports = router;

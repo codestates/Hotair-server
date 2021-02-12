@@ -5,25 +5,26 @@ module.exports = async (req, res) => {
   const uuid = req.params.uuid;
   const { username, email, password, phone, avatar } = req.body;
   try {
-    let alreadyUser = await users.findOne({
-      where: { [Op.or]: [{ email: email }, { username: username }] },
-    });
-    if (alreadyUser) {
-      return res
-        .status(409)
-        .json({ message: 'User with username or email already exists' });
-    } else {
-      const user = await users.findOne({ where: { uuid } });
+    const user = await users.findOne({ where: { uuid } });
+    if (user.password === password) {
+      let alreadyUser = await users.findOne({
+        where: { [Op.or]: [{ email: email }, { username: username }] },
+      });
+      if (alreadyUser) {
+        return res
+          .status(409)
+          .json({ message: 'User with username or email already exists' });
+      } else {
+        user.username = username;
+        user.email = email;
+        user.password = password;
+        user.phone = phone;
+        user.avatar = avatar;
 
-      user.username = username;
-      user.email = email;
-      user.password = password;
-      user.phone = phone;
-      user.avatar = avatar;
+        await user.save();
 
-      await user.save();
-
-      return res.json(user);
+        return res.json(user);
+      }
     }
   } catch (err) {
     switch (err.errors[0].validatorKey) {

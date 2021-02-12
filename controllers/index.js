@@ -12,4 +12,5 @@ module.exports = {
   clickLike: require('./likes/clickLike'),
   addChannel: require('./channels/addChannel'),
   getChannels: require('./channels/getChannels'),
+  githubLoginCallback: require('./users/githubLogin').callback,
 };

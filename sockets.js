@@ -8,7 +8,6 @@ io.use(async (socket, next) => {
   try {
     const token = socket.handshake.query.token;
     const userInfo = await jwt.verify(token, process.env.SECRET);
-    console.log(userInfo);
     socket.username = userInfo.username;
     next();
   } catch (err) {

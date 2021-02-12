@@ -1,7 +1,7 @@
 const { users } = require('../../models');
 
 module.exports = async (req, res) => {
-  const uuid = req.params.uuid;
+  const uuid = req.body.uuid;
   try {
     const user = await users.findOne({ where: { uuid } });
     await user.destroy();

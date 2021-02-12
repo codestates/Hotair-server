@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   callback: async (req, res) => {
-    console.log(req.body);
     axios({
       method: 'post',
       url: `https://github.com/login/oauth/access_token`,
@@ -46,7 +45,6 @@ module.exports = {
           process.env.SECRET,
           { expiresIn: '3h' },
         );
-        console.log(token);
         return res.status(200).json({ token });
       })
       .catch((err) => {

@@ -24,7 +24,7 @@ router.get('/users/:channelName', auth, mainController.getOtherUsersInfo);
 //Mypage component에서 로그인된 회원정보 불러오기 컨트롤러 users/getUserInfo.js
 // path = 유저의 uuid
 // res = 로그인된 유저 정보 (id, password 제외)
-router.get('/users/:uuid', auth, mainController.getUserInfo);
+router.get('/users/myinfo/:uuid', auth, mainController.getUserInfo);
 
 //Chats component에서 chat 보내기 chats/sendChat.js
 // req.headers = token, req.body = text, uuid

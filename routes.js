@@ -34,7 +34,7 @@ router.post('/chats/sendChat', auth, mainController.sendChat);
 //Chats component에서 해당 channel의 모든 chat 가져오기 chats/getChats.js
 // path = :channelId
 // res = 모든 chat 정보
-router.get('/chats/:channelId', auth, mainController.getChats);
+router.get('/chats/:channelName', auth, mainController.getChats);
 
 //Mypage component에서 회원탈퇴 컨트롤러 users/deleteUser.js
 //path = :uuid
@@ -64,8 +64,8 @@ router.get('/channels', auth, mainController.getChannels);
 // ----------------------
 // 깃허브 로그인
 // post: client에서 포스트 요청으로 보낸 authorization code가 req
-router.post('/github/login/callback', mainController.githubLoginCallback);
-// get: access token에 있는 리소스서버를 확인
-router.get('/github/login/images', mainController.githubLoginImages);
+// router.post('/github/login/callback', mainController.githubLoginCallback);
+// // get: access token에 있는 리소스서버를 확인
+// router.get('/github/login/images', mainController.githubLoginImages);
 
 module.exports = router;

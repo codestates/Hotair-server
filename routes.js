@@ -39,7 +39,7 @@ router.get('/chats/:channelName', auth, mainController.getChats);
 //Mypage component에서 회원탈퇴 컨트롤러 users/deleteUser.js
 //path = :uuid
 // res = delete
-router.delete('/users/delete/:uuid', auth, mainController.deleteUser);
+router.delete('/users/delete', auth, mainController.deleteUser);
 
 //Mypage component에서 유저 정보 변경 컨트롤러 users/updateUserInfo.js
 // path = :uuid

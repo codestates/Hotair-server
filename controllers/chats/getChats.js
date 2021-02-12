@@ -5,7 +5,6 @@ const { channels } = require('../../models');
 module.exports = async (req, res) => {
   try {
     const channelName = req.params.channelName;
-    console.log(channelName);
     const channel = await channels.findOne({ where: { channelName } });
     const chatList = await chats.findAll({
       where: { channelId: channel.id },

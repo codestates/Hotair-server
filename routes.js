@@ -64,8 +64,6 @@ router.get('/channels', auth, mainController.getChannels);
 // ----------------------
 // 깃허브 로그인
 // post: client에서 포스트 요청으로 보낸 authorization code가 req
-// router.post('/github/login/callback', mainController.githubLoginCallback);
-// // get: access token에 있는 리소스서버를 확인
-// router.get('/github/login/images', mainController.githubLoginImages);
+router.post('/github/login/callback', mainController.githubLoginCallback);
 
 module.exports = router;

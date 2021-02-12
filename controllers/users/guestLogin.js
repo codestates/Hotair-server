@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     return Math.floor(Math.random() * Math.floor(max));
   }
   try {
-    let number = getRandomInt(20);
+    let number = getRandomInt(99);
     await users.create({
       username: 'guest',
       email: `guest${number}@guest.com`,

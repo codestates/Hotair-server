@@ -1,5 +1,4 @@
 const { users } = require('../../models');
-const { Op } = require('sequelize');
 
 module.exports = async (req, res) => {
   const uuid = req.params.uuid;
@@ -8,7 +7,7 @@ module.exports = async (req, res) => {
     const user = await users.findOne({ where: { uuid } });
     if (user.password === password) {
       let alreadyUser = await users.findOne({
-        where: { [Op.or]: [{ email: email }, { username: username }] },
+        where: { username: username },
       });
       if (alreadyUser) {
         return res

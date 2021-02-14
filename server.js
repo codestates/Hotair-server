@@ -13,7 +13,13 @@ sequelize.sync();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: ['https://hotair.ml'],
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+  }),
+);
 app.use(cookieParser());
 
 app.use('', router);
@@ -27,9 +33,9 @@ const jwt = require('jsonwebtoken');
 
 const io = require('socket.io')(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://hotair.ml',
     credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
+    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
   },
 });
 
